@@ -5,7 +5,7 @@
       <ul v-for="movie in movies" :key="movie.id">
         <li>Titolo : <strong>{{movie.title}}</strong></li>
         <li>Titolo originale : <strong>{{movie.original_title}}</strong></li>
-        <li>Lingua : <strong>{{movie.original_language}}</strong></li>
+        <li>Lingua : {{languageFlag(movie.original_language)}}</li>
         <li>Voto : <strong>{{movie.vote_average}}</strong></li>
       </ul>
   </header>
@@ -36,13 +36,38 @@ export default {
         this.movies = resp.data.results;
         console.log(this.movies.results);
       } )
+    },
+
+    languageFlag(lang) {
+      switch(lang) {
+        case 'it':
+          return '🇮🇹'
+
+        case  'fr' : 
+          return '🇫🇷'
+
+        case 'en' :
+          return '🇬🇧'
+
+        case 'de' :
+          return '🇩🇪'
+
+        case 'ru' :
+          return '🇷🇺'
+
+        case 'zh' :
+          return '🇨🇳'
+
+        default :
+          return lang
+      }
     }
+
   }
 
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 </style>
