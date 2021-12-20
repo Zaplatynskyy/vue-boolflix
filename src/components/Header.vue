@@ -10,7 +10,11 @@
           <li>Titolo : <strong>{{movie.title}}</strong></li>
           <li>Titolo originale : <strong>{{movie.original_title}}</strong></li>
           <li>Lingua : {{languageFlag(movie.original_language)}}</li>
-          <li>Voto : <strong>{{movie.vote_average}}</strong></li>
+          <li>
+            Voto : 
+            <i v-show="editVoteStar(movie.vote_average) > 0" v-for="(star,i) in editVoteStar(movie.vote_average)" :key="i" class="fas fa-star"></i>
+            <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star,i) in (5 - editVoteStar(movie.vote_average))" :key="i" class="far fa-star"></i>
+          </li>
         </ul>
       </div>
       <!-- lista serie tv -->
@@ -21,7 +25,11 @@
           <li>Titolo : <strong>{{tvShow.name}}</strong></li>
           <li>Titolo originale : <strong>{{tvShow.original_name}}</strong></li>
           <li>Lingua : {{languageFlag(tvShow.original_language)}}</li>
-          <li>Voto : <strong>{{tvShow.vote_average}}</strong></li>
+          <li>
+            Voto : 
+            <i v-show="editVoteStar(tvShow.vote_average) > 0" v-for="(star,i) in editVoteStar(tvShow.vote_average)" :key="i" class="fas fa-star"></i>
+            <i v-show="editVoteStar(tvShow.vote_average) < 5" v-for="(star,i) in (5 - editVoteStar(tvShow.vote_average))" :key="i" class="far fa-star"></i>
+          </li>
         </ul>
       </div>
 
@@ -104,6 +112,10 @@ export default {
       } else {
         return 'http://tuscaniagres.it/wp-content/plugins/lightbox/images/No-image-found.jpg'
       }
+    },
+
+    editVoteStar(vote) {
+      return vote = Math.ceil(vote/2);
     }
 
   }
