@@ -1,22 +1,24 @@
 <template>
     <header>
-        <div v-show="!searchOn" class="header_nav">
+        <div v-show="!dataShared.searchOn" class="header_nav">
           <div class="header_left">
             <i class="fas fa-bars"></i>
             <img src="../assets/img/logo.png" alt="">
           </div>
 
           <div class="header_right">
-            <i class="fas fa-search" @click="searchBar()"></i>
+            <label for="search" @click="searchBar()">
+              <i class="fas fa-search"></i>
+            </label>
             <i class="fas fa-ellipsis-h"></i>
           </div>
         </div>
 
-        <div v-show="searchOn" class="header_search">
+        <div v-show="dataShared.searchOn" class="header_search">
           <i class="fas fa-arrow-left" @click="searchBar()"></i>
           <div class="input_search" @keyup.enter="search()">
             <i class="fas fa-search" @click="search()"></i>
-            <input type="text" placeholder="Cerca" v-model="inputSearch">
+            <input id="search" type="text" placeholder="Cerca" v-model="inputSearch">
           </div>
         </div>
     </header>
@@ -31,7 +33,6 @@ export default {
 
   data() {
     return {
-      searchOn : false,
       inputSearch : '',
       dataShared
     }
@@ -40,7 +41,7 @@ export default {
   methods : {
 
     searchBar() {
-      this.searchOn = !this.searchOn
+      this.dataShared.searchOn = !this.dataShared.searchOn
     },
 
     search() {
@@ -65,7 +66,7 @@ export default {
           this.dataShared.tvShows = resp.data.results
       } ),
 
-      this.inputSearch = '',
+      this.inputSearch = ''
 
       this.searchBar()
     }

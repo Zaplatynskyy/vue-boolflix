@@ -1,27 +1,38 @@
 <template>
   <main>
-    <div class="content_row">
+    <div v-show="dataShared.searchOn" class="layover"></div>
+    <section v-show="dataShared.movies.length > 0" class="content_row">
         <div class="type">Film</div>
-        <div class="row">
-            <div class="box" v-for="movie in dataShared.movies" :key="movie.id">
-                <img :src="editImg(movie.poster_path)" :alt="movie.original_title">
+        <div class="container">
+            <div class="turn left" @click="scrollLeft">
+                <i class="fas fa-arrow-alt-circle-left"></i>
+            </div>
+            <div class="row" :style="{ transform : translateFunction() }">
+                
+                <div class="box" v-for="movie in dataShared.movies" :key="movie.id">
+                    <img :src="editImg(movie.poster_path)" :alt="movie.original_title">
 
-                <div class="info_hover">
-                    <ul class="info_list">
-                        <li><strong>Titolo</strong> : {{movie.title}}</li>
-                        <li><strong>Lingua</strong> : {{languageFlag(movie.original_language)}}</li>
-                        <li>
-                            <strong>Voto</strong> : 
-                            <i v-show="editVoteStar(movie.vote_average) > 0" v-for="(star) in editVoteStar(movie.vote_average)" :key="star.id" class="fas fa-star"></i>
-                            <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star) in (5 - editVoteStar(movie.vote_average))" :key="star.id" class="far fa-star"></i>
-                        </li>
-                    </ul>
+                    <div class="info_hover">
+                        <ul class="info_list">
+                            <li><strong>Titolo</strong> : {{movie.title}}</li>
+                            <li><strong>Lingua</strong> : {{languageFlag(movie.original_language)}}</li>
+                            <li>
+                                <strong>Voto</strong> : 
+                                <i v-show="editVoteStar(movie.vote_average) > 0" v-for="(star) in editVoteStar(movie.vote_average)" :key="star.id" class="fas fa-star"></i>
+                                <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star) in (5 - editVoteStar(movie.vote_average))" :key="star.id" class="far fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                
+            </div>
+            <div class="turn right" @click="scrollRight">
+                <i class="fas fa-arrow-alt-circle-right"></i>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="content_row">
+    <section class="content_row" v-show="dataShared.tvShows.length > 0">
         <div class="type">Serie</div>
         <div class="row">
             <div class="box" v-for="tvShow in dataShared.tvShows" :key="tvShow.id">
@@ -40,7 +51,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
   </main>
 </template>
 
@@ -52,7 +63,8 @@ export default {
 
     data() {
         return {
-            dataShared
+            dataShared,
+            translate : 0
         }
     },
 
@@ -97,7 +109,24 @@ export default {
 
         editVoteStar(vote) {
             return vote = Math.ceil(vote/2);
+        },
+
+        translateFunction() {
+            return `translateX(-${this.translate}%)`
+        },
+
+        scrollLeft() {
+            if(this.translate > 0) {
+                this.translate -=10
+            } 
+        },
+
+        scrollRight() {
+            if(this.translate < 110) {
+                this.translate +=10
+            } 
         }
+        
 
     }
 }
@@ -106,24 +135,61 @@ export default {
 <style lang="scss" scoped>
 
     main {
-        min-height: calc(100vh - 80px);
+        min-height: calc(100vh - 60px);
         background: rgb(0,0,0);
         background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 84%, rgba(19,19,25,1) 100%); 
         padding: 30px 5px;
+        position: relative;
+
+        .layover {
+            background-color: rgba(0,0,0,.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
 
         .type {
             color: white;
             margin: 0 5px;
         }
 
-        .row {
-            // background-color: lightgrey;
-            // border: 2px solid black;
-            display: flex;
-            flex-wrap: wrap;
+        .container {
+            position: relative;
 
+            .turn {
+                
+                font-size: 40px;
+
+                i {
+                    color: grey;
+                    cursor: pointer;
+                }
+
+                &.left {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    z-index: 1;
+                }
+
+                &.right {
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    z-index: 1;
+                }
+            }
+        }
+
+        .row {
+            display: flex;
+            
             .box {
                 width: calc(100% / 10);
+                min-width: calc(100% / 10);
                 height: 300px;
                 margin: 5px;
                 position: relative;
