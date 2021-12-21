@@ -1,11 +1,9 @@
 <template>
   <main>
-    <input type="text" placeholder="Search movie" v-model="inputSearch">
-    <button class="btn" @click="search">Search</button>
     <!-- lista film -->
     <h2>Film</h2>
     <div class="row movies">
-        <ul v-for="movie in movies" :key="movie.id">
+        <ul v-for="movie in dataShared.movies" :key="movie.id">
             <li><img :src="editImg(movie.poster_path)" :alt="movie.original_title"></li>
             <li>Titolo : <strong>{{movie.title}}</strong></li>
             <li>Titolo originale : <strong>{{movie.original_title}}</strong></li>
@@ -20,7 +18,7 @@
     <!-- lista serie tv -->
     <h2>Serie</h2>
     <div class="row tv_shows">
-        <ul v-for="tvShow in tvShows" :key="tvShow.id">
+        <ul v-for="tvShow in dataShared.tvShows" :key="tvShow.id">
         <li><img :src="editImg(tvShow.poster_path)" :alt="tvShow.original_title"></li>
         <li>Titolo : <strong>{{tvShow.name}}</strong></li>
         <li>Titolo originale : <strong>{{tvShow.original_name}}</strong></li>
@@ -36,45 +34,18 @@
 </template>
 
 <script>
-import axios from 'axios'
+import dataShared from '../dataShared'
 
 export default {
     name : 'Main',
 
     data() {
         return {
-            inputSearch : '',
-            movies : [],
-            tvShows : []
+            dataShared
         }
     },
 
     methods : {
-        search() {
-            axios.get('https://api.themoviedb.org/3/search/movie' , {
-                params : {
-                api_key : '53d59c9e8ce0cd47e3b9162e1493c788',
-                query : this.inputSearch
-                }
-            })
-            .then( resp => {
-                this.movies = resp.data.results;
-                console.log(this.movies.results);
-            } ),
-
-            axios.get('https://api.themoviedb.org/3/search/tv' , {
-                params : {
-                    api_key : '53d59c9e8ce0cd47e3b9162e1493c788',
-                    query : this.inputSearch
-                }
-            })
-            .then ( resp => {
-                console.log(resp.data.results);
-                this.tvShows = resp.data.results
-            } )
-
-        },
-
         languageFlag(lang) {
             switch(lang) {
                 case 'it':
