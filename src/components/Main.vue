@@ -122,7 +122,7 @@ export default {
         },
 
         scrollRight() {
-            if(this.translate < 110) {
+            if(this.translate < 120) {
                 this.translate +=10
             } 
         }
@@ -138,7 +138,7 @@ export default {
         min-height: calc(100vh - 60px);
         background: rgb(0,0,0);
         background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 84%, rgba(19,19,25,1) 100%); 
-        padding: 30px 5px;
+        padding: 30px 0;
         position: relative;
 
         .layover {
@@ -153,45 +153,73 @@ export default {
 
         .type {
             color: white;
-            margin: 0 5px;
+            margin: 5px;
         }
 
         .container {
             position: relative;
 
             .turn {
-                
+                width: 100px;
+                height: 100%;
                 font-size: 40px;
+                background-color: rgb(128,128,128,.8);
+                cursor: pointer;
+                position: absolute;
+                z-index: 1;
 
                 i {
-                    color: grey;
-                    cursor: pointer;
+                    color: rgb(190, 190, 190);
                 }
 
                 &.left {
-                    position: absolute;
                     left: 0;
-                    top: 50%;
+                    top: 0;
                     z-index: 1;
+                    opacity: 0;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                    
+                    i {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1;
+                    }
                 }
 
                 &.right {
                     position: absolute;
                     right: 0;
-                    top: 50%;
-                    z-index: 1;
+                    top: 0;
+                    opacity: 0;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+
+                    i {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1;
+                    }
                 }
             }
         }
 
         .row {
             display: flex;
-            
+
             .box {
                 width: calc(100% / 10);
                 min-width: calc(100% / 10);
                 height: 300px;
-                margin: 5px;
+                margin: 0 5px;
                 position: relative;
                 cursor: pointer;
 
