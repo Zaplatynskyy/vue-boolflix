@@ -1,7 +1,12 @@
 <template>
   <main>
+    <div class="row">
+        <div class="box">
+            
+        </div>
+    </div>
     <!-- lista film -->
-    <h2>Film</h2>
+    <!-- <h2>Film</h2>
     <div class="row movies">
         <ul v-for="movie in dataShared.movies" :key="movie.id">
             <li><img :src="editImg(movie.poster_path)" :alt="movie.original_title"></li>
@@ -14,9 +19,9 @@
             <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star) in (5 - editVoteStar(movie.vote_average))" :key="star.id" class="far fa-star"></i>
             </li>
         </ul>
-    </div>
+    </div> -->
     <!-- lista serie tv -->
-    <h2>Serie</h2>
+    <!-- <h2>Serie</h2>
     <div class="row tv_shows">
         <ul v-for="tvShow in dataShared.tvShows" :key="tvShow.id">
         <li><img :src="editImg(tvShow.poster_path)" :alt="tvShow.original_title"></li>
@@ -29,7 +34,7 @@
             <i v-show="editVoteStar(tvShow.vote_average) < 5" v-for="(star) in (5 - editVoteStar(tvShow.vote_average))" :key="star.id" class="far fa-star"></i>
         </li>
         </ul>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -93,11 +98,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    main {
+        height: calc(100vh - 80px);
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 84%, rgba(19,19,25,1) 100%); 
+        padding: 30px 5px;
+    }
+
     .row {
-        background-color: lightgrey;
-        border: 2px solid black;
+        // background-color: lightgrey;
+        // border: 2px solid black;
         display: flex;
         flex-wrap: wrap;
 
+        .box {
+            width: calc(100% / 10);
+            height: 300px;
+            background-color: blue;
+            margin: 5px;
+        }
     }
+
 </style>

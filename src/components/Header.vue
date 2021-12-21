@@ -14,7 +14,7 @@
 
         <div v-show="searchOn" class="header_search">
           <i class="fas fa-arrow-left" @click="searchBar()"></i>
-          <div class="input_search">
+          <div class="input_search" @keyup.enter="search()">
             <i class="fas fa-search" @click="search()"></i>
             <input type="text" placeholder="Cerca" v-model="inputSearch">
           </div>
@@ -63,7 +63,11 @@ export default {
       .then ( resp => {
           console.log(resp.data.results);
           this.dataShared.tvShows = resp.data.results
-      } )
+      } ),
+
+      this.inputSearch = '',
+
+      this.searchBar()
     }
 
   }
