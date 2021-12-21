@@ -12,8 +12,8 @@
           <li>Lingua : {{languageFlag(movie.original_language)}}</li>
           <li>
             Voto : 
-            <i v-show="editVoteStar(movie.vote_average) > 0" v-for="(star,i) in editVoteStar(movie.vote_average)" :key="i" class="fas fa-star"></i>
-            <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star,i) in (5 - editVoteStar(movie.vote_average))" :key="i" class="far fa-star"></i>
+            <i v-show="editVoteStar(movie.vote_average) > 0" v-for="(star) in editVoteStar(movie.vote_average)" :key="star.id" class="fas fa-star"></i>
+            <i v-show="editVoteStar(movie.vote_average) < 5" v-for="(star) in (5 - editVoteStar(movie.vote_average))" :key="star.id" class="far fa-star"></i>
           </li>
         </ul>
       </div>
@@ -27,8 +27,8 @@
           <li>Lingua : {{languageFlag(tvShow.original_language)}}</li>
           <li>
             Voto : 
-            <i v-show="editVoteStar(tvShow.vote_average) > 0" v-for="(star,i) in editVoteStar(tvShow.vote_average)" :key="i" class="fas fa-star"></i>
-            <i v-show="editVoteStar(tvShow.vote_average) < 5" v-for="(star,i) in (5 - editVoteStar(tvShow.vote_average))" :key="i" class="far fa-star"></i>
+            <i v-show="editVoteStar(tvShow.vote_average) > 0" v-for="(star) in editVoteStar(tvShow.vote_average)" :key="star.id" class="fas fa-star"></i>
+            <i v-show="editVoteStar(tvShow.vote_average) < 5" v-for="(star) in (5 - editVoteStar(tvShow.vote_average))" :key="star.id" class="far fa-star"></i>
           </li>
         </ul>
       </div>
