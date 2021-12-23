@@ -58,8 +58,8 @@ export default {
       // chiamata axios per la lista dei film 
       axios.get('https://api.themoviedb.org/3/search/movie' , {
           params : {
-          api_key : '53d59c9e8ce0cd47e3b9162e1493c788',
-          query : this.inputSearch
+            api_key : '53d59c9e8ce0cd47e3b9162e1493c788',
+            query : this.inputSearch
           }
       })
       .then( resp => {
@@ -82,7 +82,9 @@ export default {
       this.inputSearch = ''
 
       // una volta effettuata la ricerca richiamo il metodo searchBar() (vedi sopra)
-      this.searchBar()
+      this.searchBar(),
+      // durante la ricerca cambio la variabile globale in true(vedi dataShared.js)
+      this.dataShared.searching = true
     }
 
   }

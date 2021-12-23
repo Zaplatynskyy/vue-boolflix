@@ -72,75 +72,81 @@ export default {
 
 <style lang="scss" scoped>
 
-    // stile titolo della sezione
-    .title_type {
-        color: white;
-        margin: 5px;
-    }
+    section {
+        margin-bottom: 20px;
 
-    // container che contiene tutti gli elementi che compongono la riga dei film visualizzati
-    .container {
-        position: relative;
+        // stile titolo della sezione
+        .title_type {
+            color: white;
+            margin: 5px;
+        }
 
-        // contenitore freccia destra sinistra
-        .turn {
-            width: 100px;
-            height: 100%;
-            font-size: 40px;
-            background-color: rgb(128,128,128,.8);
-            cursor: pointer;
-            position: absolute;
-            z-index: 1;
+        // container che contiene tutti gli elementi che compongono la riga dei film visualizzati
+        .container {
+            position: relative;
 
-            // l'icona freccia destra sinistra
-            i {
-                color: rgb(190, 190, 190);
-            }
-
-            // contenitore della freccia verso sinistra
-            &.left {
-                left: 0;
-                top: 0;
+            // contenitore freccia destra sinistra
+            .turn {
+                width: 100px;
+                height: 100%;
+                font-size: 40px;
+                background-color: rgb(128,128,128,.8);
+                cursor: pointer;
+                position: absolute;
                 z-index: 1;
-                opacity: 0;
 
-                &:hover {
-                    opacity: 1;
+                // l'icona freccia destra sinistra
+                i {
+                    color: rgb(190, 190, 190);
+                }
+
+                // contenitore della freccia verso sinistra
+                &.left {
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                    opacity: 0;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                    
+                    i {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1;
+                    }
                 }
                 
-                i {
+                // contenitore della freccia verso destra
+                &.right {
                     position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: 1;
-                }
-            }
-            
-            // contenitore della freccia verso destra
-            &.right {
-                position: absolute;
-                right: 0;
-                top: 0;
-                opacity: 0;
+                    right: 0;
+                    top: 0;
+                    opacity: 0;
 
-                &:hover {
-                    opacity: 1;
-                }
+                    &:hover {
+                        opacity: 1;
+                    }
 
-                i {
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: 1;
+                    i {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1;
+                    }
                 }
             }
         }
+
+        // riga contenitore la lista dei film visualizzati
+        .row {
+            display: flex;
+        }
     }
 
-    // riga contenitore la lista dei film visualizzati
-    .row {
-        display: flex;
-    }
+    
 </style>
