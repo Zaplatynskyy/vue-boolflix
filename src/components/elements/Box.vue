@@ -83,8 +83,8 @@ export default {
 <style lang="scss" scoped>
     // elemento box rappresentante il singolo film
     .box {
-        width: calc(100% / 10);
-        min-width: calc(100% / 10);
+        width: calc(100% / 10 - 10px);
+        min-width: calc(100% / 10 - 10px);
         height: 300px;
         margin: 0 5px;
         position: relative;

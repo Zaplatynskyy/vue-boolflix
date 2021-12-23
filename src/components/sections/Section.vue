@@ -4,10 +4,10 @@
         <!-- titolo sezione -->
         <div class="title_type">{{titleSection}}</div>
 
-        <div class="container">
+        <div class="container" @mouseover="displayBtn()" @mouseout="hiddenBtn()">
             <!-- bottone per scorrere la riga dei film verso destra -->
-            <div class="turn left" @click="scrollLeft">
-                <i class="fas fa-arrow-alt-circle-left"></i>
+            <div class="btn left" @click="scrollLeft" :style="{ display : displayLeft}">
+                <i class="fas fa-chevron-left"></i>
             </div>
             <!-- riga film distribuiti su un unica riga -->
             <div class="row" :style="{ transform : translateFunction() }">
@@ -17,8 +17,8 @@
 
             </div>
             <!-- bottone per scorrere la riga dei film verso sinistra -->
-            <div class="turn right" @click="scrollRight">
-                <i class="fas fa-arrow-alt-circle-right"></i>
+            <div class="btn right" @click="scrollRight" :style="{ display : displayRight}">
+                <i class="fas fa-chevron-right"></i>
             </div>
         </div>
 
@@ -42,11 +42,34 @@ export default {
 
     data() {
         return {
-            translate : 0
+            translate : 0,
+            displayLeft : 'block',
+            displayRight : 'block'
         }
     },
 
     methods : {
+        // funzione che controlla il display a seconda della transizione della row
+        displayBtn() {
+            if(this.translate > 0 && this.translate < 100) {
+                // se la row è visualizzata in mezzo, visualizza entrambi i bottoni
+                this.displayLeft = 'block';
+                this.displayRight = 'block'
+            } else if (this.translate < 100) {
+                // se la row è visualizzata alla fine, visualizza solo il bottone per tornare indietro
+                this.displayRight = 'block'
+            } else if (this.translate > 0) {
+                // se la row è visualizzata all'inizio, visualizza solo il bottone per andare avanti
+                this.displayLeft = 'block'                
+            }
+        },
+
+        // funzione che assegna display none ad entrambi i bottoni(si attiva quando siamo fuori col mouse dal contenitore in questione)
+        hiddenBtn() {
+            this.displayLeft = 'none',
+            this.displayRight = 'none'
+        },
+
         // metodo per definire il valore translate in percentuale della proprietà transform
         translateFunction() {
             return `translateX(-${this.translate}%)`
@@ -55,14 +78,14 @@ export default {
         // metodo per scorrere la row verso sinistra
         scrollLeft() {
             if(this.translate > 0) {
-                this.translate -=10
+                this.translate -=50
             } 
         },
 
         // metodo per scorrere la row verso destra
         scrollRight() {
-            if(this.translate < 120) {
-                this.translate +=10
+            if(this.translate < 100) {
+                this.translate +=50
             } 
         }
     
@@ -86,18 +109,18 @@ export default {
             position: relative;
 
             // contenitore freccia destra sinistra
-            .turn {
-                width: 100px;
+            .btn {
+                width: 80px;
                 height: 100%;
-                font-size: 40px;
-                background-color: rgb(128,128,128,.8);
+                font-size: 20px;
+                background-color: rgba(0, 0, 0, .5);
                 cursor: pointer;
                 position: absolute;
                 z-index: 1;
 
                 // l'icona freccia destra sinistra
                 i {
-                    color: rgb(190, 190, 190);
+                    color: white;
                 }
 
                 // contenitore della freccia verso sinistra
@@ -105,11 +128,6 @@ export default {
                     left: 0;
                     top: 0;
                     z-index: 1;
-                    opacity: 0;
-
-                    &:hover {
-                        opacity: 1;
-                    }
                     
                     i {
                         position: absolute;
@@ -125,11 +143,6 @@ export default {
                     position: absolute;
                     right: 0;
                     top: 0;
-                    opacity: 0;
-
-                    &:hover {
-                        opacity: 1;
-                    }
 
                     i {
                         position: absolute;
@@ -145,6 +158,7 @@ export default {
         // riga contenitore la lista dei film visualizzati
         .row {
             display: flex;
+            transition: .5s;
         }
     }
 
