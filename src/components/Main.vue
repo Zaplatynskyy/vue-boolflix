@@ -151,16 +151,5 @@ export default {
         background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 84%, rgba(19,19,25,1) 100%); 
         padding: 30px 0;
         position: relative;
-
-        // layover che oscura la sezione main quando facciamo una ricerca
-        .layover {
-            background-color: rgba(0,0,0,.6);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-        }
     }
 </style>

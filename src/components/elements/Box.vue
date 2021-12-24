@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="box" @click="viewInfo(movie)">
         <!-- immagine film per lo sfondo della box -->
         <img :src="editImg(movie.poster_path)" :alt="movie.original_title">
 
@@ -24,14 +24,27 @@
 </template>
 
 <script>
+import dataShared from '../../dataShared'
+
 export default {
     name : 'Box',
+
+    data() {
+        return {
+            dataShared
+        }
+    },
 
     props : {
         movie : Object
     },
 
     methods : {
+        viewInfo(movie) {
+            this.dataShared.popUp = movie;
+            this.dataShared.infoMovieOn = true
+        },
+
         // metodo per l'emoji della lingua del film
         languageFlag(lang) {
             switch(lang) {

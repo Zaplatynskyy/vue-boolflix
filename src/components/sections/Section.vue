@@ -43,8 +43,8 @@ export default {
     data() {
         return {
             translate : 0,
-            displayLeft : 'block',
-            displayRight : 'block'
+            displayLeft : 'none',
+            displayRight : 'none'
         }
     },
 
