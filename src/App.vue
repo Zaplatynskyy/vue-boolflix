@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{ info_movie_on : dataShared.infoMovieOn }">
-    <div v-show="dataShared.infoMovieOn" class="layover" @click="dataShared.infoMovieOn = false"></div>
+    <div v-show="dataShared.infoMovieOn" class="layover" @click="resetInfo()"></div>
     <Header/>
     <Main/>
   </div>
@@ -20,6 +20,13 @@ export default {
   data() {
     return {
       dataShared
+    }
+  },
+
+  methods : {
+    resetInfo() {
+      dataShared.infoMovieOn = false,
+      dataShared.popUp = {}
     }
   }
 }

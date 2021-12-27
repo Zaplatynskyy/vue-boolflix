@@ -31,23 +31,21 @@
 
         </div>
 
-        <div v-show="dataShared.infoMovieOn" class="info_movie">
-          <div class="img">
-            <img :src="`https://image.tmdb.org/t/p/original${dataShared.popUp.backdrop_path}`" :alt="dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name">
-          </div>
-          <div class="text">
-            <div class="title">{{dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name}}</div>
-          </div>
-        </div>
+        <InfoMovie v-if="dataShared.infoMovieOn"/>
     </header>
 </template>
 
 <script>
 import axios from 'axios'
 import dataShared from '../dataShared'
+import InfoMovie from './elements/InfoMovie.vue'
 
 export default {
   name: 'Header',
+
+  components : {
+    InfoMovie
+  },
 
   data() {
     return {
@@ -95,7 +93,6 @@ export default {
       // durante la ricerca cambio la variabile globale in true(vedi dataShared.js)
       this.dataShared.searching = true
     }
-
   }
 }
 </script>
@@ -106,14 +103,6 @@ export default {
   header {
     height: 60px;
     background-color : $primary_color;
-
-    // proprietà comune a tutte le icone dell'header
-    i {
-        font-size: 20px;
-        color: white;
-        margin: 0 15px;
-        cursor: pointer;
-    }
     
     // header visibile di default
     .header_nav {
@@ -121,6 +110,14 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      // proprietà comune a tutte le icone dell'header
+      i {
+        font-size: 20px;
+        color: white;
+        margin: 0 15px;
+        cursor: pointer;
+      }
 
       .header_left {
         display: flex;
@@ -140,6 +137,14 @@ export default {
       justify-content: space-between;
       align-items: center;
 
+      // proprietà comune a tutte le icone dell'header
+      i {
+        font-size: 20px;
+        color: white;
+        margin: 0 15px;
+        cursor: pointer;
+      }
+
       .input_search {
         margin: 0 auto;
         display: flex;
@@ -154,45 +159,6 @@ export default {
         }
       }
 
-    }
-
-    .info_movie {
-      width: 40%;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9;
-      box-shadow: 0px -7px 11px 5px rgba(24,24,24,1);
-
-      .img {
-        height: 45vh;
-          img {
-            width: 100%;
-            height: 100%;
-            object-position: center;
-            object-fit: cover;
-          }
-      }
-
-      .text {
-        height: calc(100vh - 45vh);
-        background-color: #181818;
-        // -webkit-box-shadow: 0px -7px 11px 5px rgba(24,24,24,1);
-        // -moz-box-shadow: 0px -7px 11px 5px rgba(24,24,24,1);
-        box-shadow: 0px -7px 11px 5px rgba(24,24,24,1);
-        padding: 0 20px;
-        position: relative;
-        z-index: 1;
-
-        .title {
-          font-size: 38px;
-          font-weight: bold;
-          color: white;
-          position: relative;
-          bottom: 45px;
-        }
-      }
     }
   }
 </style>
