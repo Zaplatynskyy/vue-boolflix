@@ -1,6 +1,6 @@
 <template>
-  <div id="app" :class="{ info_movie_on : dataShared.infoMovieOn }">
-    <div v-show="dataShared.infoMovieOn" class="layover" @click="resetInfo()"></div>
+  <div id="app" :class="{ layover_on : dataShared.infoMovieOn || dataShared.hamburgerOn  }">
+    <div v-if="dataShared.infoMovieOn || dataShared.hamburgerOn" class="layover" @click="resetLayover()"></div>
     <Header/>
     <Main/>
   </div>
@@ -24,9 +24,10 @@ export default {
   },
 
   methods : {
-    resetInfo() {
+    resetLayover() {
       dataShared.infoMovieOn = false,
-      dataShared.popUp = {}
+      dataShared.popUp = {},
+      dataShared.hamburgerOn = false
     }
   }
 }
@@ -39,7 +40,7 @@ export default {
     overflow-x: hidden;
   }
 
-  #app.info_movie_on {
+  #app.layover_on {
     height: 100vh;
     overflow-y: hidden;
   }

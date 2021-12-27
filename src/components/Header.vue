@@ -4,7 +4,7 @@
         <div v-show="!dataShared.searchOn" class="header_nav">
           <!-- parte a sinistra dell'header contenente l'icona hamburger_menu e il logo -->
           <div class="header_left">
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-bars" @click="activeMenu()"></i>
             <img src="../assets/img/logo.png" alt="logo boolflix">
           </div>
 
@@ -31,7 +31,11 @@
 
         </div>
 
+        <!-- componente finestra informazioni del film selezionato, si visualizza al cambio valore della variabile InfoMovieOn -->
         <InfoMovie v-if="dataShared.infoMovieOn"/>
+
+        <!-- componente finestra menu hamburger, si visualizza al click del menu hamburger che cambia il valore della variabile hamburgerOn -->
+        <HamburgerMenu v-if="dataShared.hamburgerOn"/>
     </header>
 </template>
 
@@ -39,12 +43,14 @@
 import axios from 'axios'
 import dataShared from '../dataShared'
 import InfoMovie from './elements/InfoMovie.vue'
+import HamburgerMenu from './elements/HamburgerMenu.vue'
 
 export default {
   name: 'Header',
 
   components : {
-    InfoMovie
+    InfoMovie,
+    HamburgerMenu
   },
 
   data() {
@@ -92,6 +98,10 @@ export default {
       this.searchBar(),
       // durante la ricerca cambio la variabile globale in true(vedi dataShared.js)
       this.dataShared.searching = true
+    },
+
+    activeMenu() {
+      dataShared.hamburgerOn = true
     }
   }
 }
@@ -101,8 +111,11 @@ export default {
 @import '../assets/style/variables.scss';
 
   header {
+    width: 100%;
     height: 60px;
     background-color : $primary_color;
+    position: fixed;
+    z-index: 99;
     
     // header visibile di default
     .header_nav {

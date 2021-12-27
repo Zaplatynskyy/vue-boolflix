@@ -1,25 +1,33 @@
 <template>
     <div class="info_movie">
+        <!-- immagine sfondo del film selezionato -->
         <div class="img">
-        <img :src="`https://image.tmdb.org/t/p/original${dataShared.popUp.backdrop_path}`" :alt="dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name">
+            <img :src="`https://image.tmdb.org/t/p/original${dataShared.popUp.backdrop_path}`" :alt="dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name">
         </div>  
+
+        <!-- contenitore testo di tutte le informazioni relative al film selezionato -->
         <div class="text">
-        <div class="title">{{dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name}}</div>
+            <!-- titolo film -->
+            <div class="title">{{dataShared.popUp.title ? dataShared.popUp.title : dataShared.popUp.name}}</div>
 
-        <div class="info">
-            <span class="vote">
-            <!-- stella piena per ogni voto positivo che va da 1 a 5(se c'è) -->
-            <i v-show="editVoteStar(dataShared.popUp.vote_average) > 0" v-for="star in editVoteStar(dataShared.popUp.vote_average)" :key="star.id" class="fas fa-star"></i>
-            <!-- stella vuota per ogni voto mancante fino ad evere 5 stelle totali (punteggio max 5) -->
-            <i v-show="editVoteStar(dataShared.popUp.vote_average) < 5" v-for="star in (5 - editVoteStar(dataShared.popUp.vote_average))" :key="star.id" class="far fa-star"></i>
-            </span>
+            <div class="info">
+                <!-- voto film -->
+                <span class="vote">
+                    <!-- stella piena per ogni voto positivo che va da 1 a 5(se c'è) -->
+                    <i v-show="editVoteStar(dataShared.popUp.vote_average) > 0" v-for="star in editVoteStar(dataShared.popUp.vote_average)" :key="star.id" class="fas fa-star"></i>
+                    <!-- stella vuota per ogni voto mancante fino ad evere 5 stelle totali (punteggio max 5) -->
+                    <i v-show="editVoteStar(dataShared.popUp.vote_average) < 5" v-for="star in (5 - editVoteStar(dataShared.popUp.vote_average))" :key="star.id" class="far fa-star"></i>
+                </span>
 
-            <span class="lang">{{languageFlag(dataShared.popUp.original_language)}}</span>
+                <!-- lingua film -->
+                <span class="lang">{{languageFlag(dataShared.popUp.original_language)}}</span>
+                
+                <!-- anno di uscita del film -->
+                <span class="date">{{format_date(dataShared.popUp.release_date)}}</span>
 
-            <span class="date">{{format_date(dataShared.popUp.release_date)}}</span>
-        
-            <div class="overview">{{dataShared.popUp.overview}}</div>
-        </div>
+                <!-- descrizione del film -->
+                <div class="overview">{{dataShared.popUp.overview}}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -72,6 +80,7 @@ export default {
             }
         },
 
+        // metodo che restituisce la data di uscita del film in formato year
         format_date(value){
             if (value) {
                 return moment(String(value)).format('YYYY')

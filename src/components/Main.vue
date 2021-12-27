@@ -150,6 +150,7 @@ export default {
         background: rgb(0,0,0);
         background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 84%, rgba(19,19,25,1) 100%); 
         padding: 30px 0;
+        margin-top: 60px;
         position: relative;
     }
 </style>

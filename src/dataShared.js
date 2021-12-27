@@ -33,8 +33,10 @@ export default Vue.observable = {
     searchOn : false,
     // variabile searching che definisce la visualizzazione dei film di default, quando è false mostra i film in generale, durante una ricerca diventa true mostrando solo i film cercati (quindi nascondendo tutti quelli che compaiono al caricamento della pagina)
     searching : false,
-
+    // variabile che cambia valore al click di un film, oscurando lo sfondo e visualizzando le informazioni del film selezionato
     infoMovieOn : false,
-
-    popUp : {}
+    // oggetto contenitore che viene riempito con le informazioni del film cliccato. Utile da ponte di informazioni tra i componenti
+    popUp : {},
+    // variabile che al true visualizza il menu hamburger
+    hamburgerOn : false
 }
